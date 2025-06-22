@@ -1,0 +1,410 @@
+/* Root container styling */
+#root {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+  min-height: 100vh;
+}
+
+/* Logo styling with enhanced hover effects */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter, transform;
+  transition: filter 300ms, transform 300ms ease-in-out;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+  transform: scale(1.1) rotate(5deg);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Spinning logo animation */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Modern Navbar design */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 12px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  color: white;
+  margin: 0 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 300ms ease;
+}
+
+.navbar a:hover {
+  color: var(--accent-color);
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: width 300ms ease;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Card container styling */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* Individual card styling */
+.card {
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin: 1rem;
+  width: 220px;
+  background: white;
+  box-shadow: var(--box-shadow);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Read-the-docs text */
+.read-the-docs {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Custom color variables */
+:root {
+  --primary-color: #5a67d8;
+  --secondary-color: #2d3748;
+  --accent-color: #ff2e63;
+  --light-color: #f7fafc;
+  --dark-color: #1a202c;
+  --success-color: #38b2ac;
+  --warning-color: #ed8936;
+  --danger-color: #e53e3e;
+  --border-radius: 16px;
+  --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease-in-out;
+}
+
+/* Body styling */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f7fafc;
+  color: var(--dark-color);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Data cards container with responsive grid */
+.data-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .data-cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .data-cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .data-cards-container {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+
+/* Card actions (edit/delete buttons) */
+.card-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.data-card:hover .card-actions {
+  opacity: 1;
+}
+
+.delete-btn, .edit-btn {
+  background: none;
+  border: 1px solid #ccc;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.delete-btn {
+  color: var(--danger-color);
+}
+
+.delete-btn:hover {
+  background-color: #f8f8f8;
+  border-color: var(--danger-color);
+}
+
+.edit-btn {
+  color: var(--primary-color);
+}
+
+.edit-btn:hover {
+  background-color: #f8f8f8;
+  border-color: var(--primary-color);
+}
+
+/* Edit form styling */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 1.5rem;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.edit-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.edit-form input {
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 300ms ease;
+}
+
+.edit-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.2);
+}
+
+/* Form actions */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.form-actions button:first-child {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.form-actions button:first-child:hover {
+  background: var(--secondary-color);
+}
+
+.form-actions button:last-child {
+  background-color: #edf2f7;
+  border: 1px solid #cbd5e0;
+}
+
+.form-actions button:last-child:hover {
+  background-color: #e2e8f0;
+}
+
+/* Add button styling */
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2.5rem auto;
+  padding: 14px 28px;
+  background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition), opacity 300ms ease;
+}
+
+.add-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+}
+
+.add-btn.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.add-btn::before {
+  content: '+';
+  font-size: 1.4em;
+}
+
+/* Add form styling */
+.add-form {
+  background: white;
+  padding: 2.5rem;
+  margin: 2rem auto;
+  max-width: 550px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 300ms ease;
+}
+
+.add-form:hover {
+  transform: translateY(-4px);
+}
+
+.add-form h3 {
+  margin: 0 0 1.5rem;
+  color: var(--dark-color);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.add-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--dark-color);
+  font-size: 1rem;
+}
+
+.add-form input {
+  padding: 12px;
+  border: 1px solid #d1d9e6;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.add-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.15);
+  background-color: white;
+}
+
+.add-form input::placeholder {
+  color: #a0aec0;
+}
+
+.add-form .form-actions {
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+/* Data card styling */
+.data-card {
+  position: relative;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  text-align: left;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.data-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.data-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--dark-color);
+  margin-bottom: 1rem;
+}
+
+.data-card p {
+  font-size: 1rem;
+  color: #4a5568;
+  margin: 6px 0;
+}
+
+.data-card p strong {
+  color: var(--dark-color);
+}
