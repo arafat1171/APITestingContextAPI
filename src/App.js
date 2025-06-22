@@ -1,30 +1,30 @@
-// src/App.js
-import { DataProvider } from './DataContext';
-import DataDisplay from './components/DataDisplay';
 import './App.css';
-
-// Debug imports
-
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import DataDisplay from './components/DataDisplay';
+import ProductDisplay from './components/ProductDisplay';
+import { DataProvider } from './DataContext';
 
 function App() {
-  // Fallback render if components fail
-  if (!DataProvider || !DataDisplay) {
-    return <div>Error: One or more components failed to load. Check console for details.</div>;
-  }
-
   return (
     <DataProvider>
-      <div id="root">
-        <nav className="navbar">
-          <h1>API Test Using Context API</h1>
-          <div>
-            <a href="/">Home</a>
+      <Router>
+        <div className="App">
+          <nav className="navbar">
+            <h1>API Test Using Context API</h1>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/products">Products</Link></li>
+            </ul>
+          </nav>
+
+          <div className="main-content">
+            <Routes>
+              <Route path="/" element={<DataDisplay />} />
+              <Route path="/products" element={<ProductDisplay />} />
+            </Routes>
           </div>
-        </nav>
-        <div className="card-container">
-          <DataDisplay />
         </div>
-      </div>
+      </Router>
     </DataProvider>
   );
 }

@@ -93,8 +93,68 @@ export const DataProvider = ({ children }) => {
       fetchData();
     }, []); 
 
+    const [products, setProducts] = useState([]);
+    const [productsLoading, setProductsLoading] = useState(true);
+    const [productsError, setProductsError] = useState(null);
+
+    const fetchProducts = useCallback(async () => {
+      try {
+        const response = await fetch('http://192.168.10.210:8000/api/');
+        if (!response.ok) throw new Error('Failed to fetch products');
+        const result = await response.json();
+        setProducts(result);
+        setProductsLoading(false);
+      } catch (err) {
+        setProductsError(err.message);
+        setProductsLoading(false);
+      }
+    }, []);
+
+    const addProduct = useCallback(async (newProduct) => {
+      try {
+        const response = await fetch('http://192.168.10.210:8000/api/', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(newProduct)
+        });
+        const result = await response.json();
+        setProducts(prev => [...prev, result]);
+      } catch (err) {
+        setProductsError(err.message);
+      }
+    }, []);
+
+    const editProduct = useCallback(async (id, updatedProduct) => {
+      try {
+        const response = await fetch(`http://192.168.10.210:8000/api/${id}/`, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(updatedProduct)
+        });
+        const result = await response.json();
+        setProducts(prev => prev.map(p => p.id === id ? result : p));
+      } catch (err) {
+        setProductsError(err.message);
+      }
+    }, []);
+
+    const deleteProduct = useCallback(async (id) => {
+      try {
+        await fetch(`http://192.168.10.210:8000/api/${id}/`, {method: 'DELETE'});
+        setProducts(prev => prev.filter(p => p.id !== id));
+      } catch (err) {
+        setProductsError(err.message);
+      }
+    }, []);
+
+    useEffect(() => {
+      fetchProducts();
+    }, [fetchProducts]);
     return (
-      <DataContext.Provider value={{ data, loading, error, deleteData, editData, addData }}>
+      <DataContext.Provider value={{ 
+        data, loading, error, deleteData, editData, addData,
+        products, productsLoading, productsError, addProduct, editProduct, deleteProduct
+      }}>
         {children}
       </DataContext.Provider>
     );
